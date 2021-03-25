@@ -6,13 +6,15 @@
       app
       dark
     >
-      <!-- <template #prepend>
+      <template #prepend>
         <v-row justify="center">
-          <v-col cols="5" class="my-5">
-            <img src="~/assets/logo.webp" alt="" class="img-block">
+          <v-col class="my-5">
+            <header class="header-logo elevation-2 mt-4">
+              <img src="~/assets/logo.webp" alt="Zapaterias de León">
+            </header>
           </v-col>
         </v-row>
-      </template> -->
+      </template>
       <v-list flat>
         <v-list-item
           color="#ffca1d"
@@ -20,9 +22,9 @@
           router
           exact
         >
-          <v-list-item-action>
+          <!-- <v-list-item-action>
             <v-icon>mdi-home</v-icon>
-          </v-list-item-action>
+          </v-list-item-action> -->
           <v-list-item-content>
             <v-list-item-title>
               Inicio
@@ -55,11 +57,21 @@
       fixed
       app
       elevation="1"
-      color="#212121"
-      dark
+      color="#fbfbfb"
     >
+      <nuxt-link to="/" class="app-bar-logo">
+        <img src="~/assets/logo.webp" alt="Zapaterias de León" class="img-block">
+      </nuxt-link>
+      <v-spacer/>
+      <v-toolbar-title>
+        <h4 class="title">
+          <small>
+            ZAPATERÍAS D' LEÓN
+          </small>
+        </h4>
+      </v-toolbar-title>
+      <v-spacer/>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title v-text="title" />
     </v-app-bar>
     <v-main>
       <v-container>
@@ -78,20 +90,20 @@ export default {
         {
           // icon: 'mdi-chart-bubble',
           title: 'Caballero',
-          to: '/categoria/caballero'
+          to: '/categorias/caballero'
         },
         {
           // icon: 'mdi-chart-bubble',
           title: 'Dama',
-          to: '/categoria/dama'
+          to: '/categorias/dama'
         },
         {
           // icon: 'mdi-chart-bubble',
           title: 'Niño',
-          to: '/categoria/niño'
+          to: '/categorias/niño'
         }
       ],
-      title: 'Zapaterías D\' León',
+      // title: 'Zapaterías D\' León',
       miniVariant: false
     }
   }

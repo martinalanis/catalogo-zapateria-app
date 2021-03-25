@@ -30,6 +30,10 @@ export default {
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
+  env: {
+    urlApi: process.env.URL_API
+  },
+
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
@@ -47,7 +51,9 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseUrl: process.env.URL_API
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
@@ -73,6 +79,10 @@ export default {
         }
       }
     }
+  },
+
+  loading: {
+    color: '#322C79'
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

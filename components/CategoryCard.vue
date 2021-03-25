@@ -10,10 +10,8 @@
         <img :src="image" alt="">
       </div>
       <h2 class="category-card__label">
-        <span>
-          {{ title }}
-        </span>
-        <a href="javascript:;" class="category-card__link">
+        <span v-html="title"></span>
+        <nuxt-link class="category-card__link" :to="to">
           <span>
             ver más
           </span>
@@ -28,7 +26,7 @@
             class="svg-arrow ml-1"
           >
             <g>
-              <rect x="6" y="13" width="28" height="1.5"/>
+              <rect x="0" y="13" width="33" height="1.5"/>
             </g>
             <g>
               <polyline
@@ -38,7 +36,7 @@
               />
             </g>
           </svg>
-        </a>
+        </nuxt-link>
       </h2>
     </v-card-text>
   </v-card>
@@ -74,7 +72,8 @@ export default {
   // grid-template-rows: auto 2rem;
   overflow: hidden;
   &__image {
-    height: calc(100% - 3.2rem);
+    // height: calc(100% - 3.2rem);
+    height: 100%;
     width: 100%;
     img {
       display: block;
@@ -86,27 +85,36 @@ export default {
   }
   &__label {
     display: block;
-    background: rgba(#111, 0.9);
+    // background: rgba(#111, 0.9);
     padding: 1rem;
     color: #ffca1d;
     font-weight: 400;
     letter-spacing: 0.1rem;
-    display: flex;
+    text-align: right;
+    // display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    position: absolute;
+    top: 0.8rem;
+    right: 0.5rem;
   }
   &__link {
+    position: relative;
     svg {
       width: 1.8rem;
     }
+    // margin-left: 3rem;
     text-decoration: none;
     letter-spacing: 0;
     font-size: 0.85rem;
     color: #f2f2f2;
     display: flex;
+    flex-direction: column;
     align-items: flex-end;
     transition: all 0.2s ease-out;
+    padding-right: 0.6rem;
     .svg-arrow {
+      transform: translate3d(0.9rem, -0.6rem, 0);
       rect {
         fill: #f2f2f2;
       }
@@ -127,6 +135,17 @@ export default {
         }
       }
     }
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 60%;
+    background: rgba(#111, 0.9);
+    transform: rotateZ(45deg) scale3d(1.8,1.8,1);
+    transform-origin: bottom right;
   }
 }
 </style>
