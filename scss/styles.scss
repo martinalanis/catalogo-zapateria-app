@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
+.theme--light.v-application {
+  font-family: 'Montserrat', sans-serif;
+  background: #f3f6fb!important;
+}
+.header-logo {
+  width: 140px;
+  padding: 15px;
+  background: #FFF;
+  border-radius: 15px;
+  // box-shadow: 2px 2px 4px #000;
+  margin: 0 auto 20px;
+  img {
+    width: 100%;
+    display: block;
+  }
+}
