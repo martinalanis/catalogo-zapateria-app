@@ -2,7 +2,9 @@
   <div>
     <v-row>
       <v-col>
-        <h3 class="text-center">CATÁLOGO DIGITAL</h3>
+        <header class="header-logo elevation-2 mt-6">
+          <img src="~/assets/logo.webp" alt="Zapaterias de León">
+        </header>
       </v-col>
     </v-row>
     <v-row justify="center" align="center" class="mb-6">
