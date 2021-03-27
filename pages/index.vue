@@ -1,16 +1,13 @@
 <template>
   <div>
-    <v-row>
+    <!-- <v-row>
       <v-col>
-        <!-- <header class="header-logo elevation-2 mt-6">
-          <img src="~/assets/logo.webp" alt="Zapaterias de León">
-        </header> -->
         <h3 class="mt-6 font-weight-medium">
           Catálogo digital
         </h3>
       </v-col>
-    </v-row>
-    <v-row justify="center" align="center" class="mb-6">
+    </v-row> -->
+    <v-row justify="center" align="center" class="my-6">
       <v-col
         v-for="({ image, title, to }, index) in categories" :key="index"
         cols="12"

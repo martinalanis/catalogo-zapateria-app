@@ -31,7 +31,8 @@ export default {
   components: true,
 
   env: {
-    urlApi: process.env.URL_API
+    urlApi: process.env.URL_API,
+    imgPath: process.env.IMG_PATH
   },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -82,7 +83,7 @@ export default {
   },
 
   loading: {
-    color: '#322C79'
+    color: '#ffca1d'
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

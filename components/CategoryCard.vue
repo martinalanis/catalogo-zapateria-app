@@ -68,8 +68,6 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
-  // display: grid;
-  // grid-template-rows: auto 2rem;
   overflow: hidden;
   &__image {
     // height: calc(100% - 3.2rem);
@@ -85,13 +83,11 @@ export default {
   }
   &__label {
     display: block;
-    // background: rgba(#111, 0.9);
     padding: 1rem;
-    color: #ffca1d;
+    color: $yellow;
     font-weight: 400;
     letter-spacing: 0.1rem;
     text-align: right;
-    // display: flex;
     justify-content: space-between;
     align-items: flex-end;
     position: absolute;
@@ -103,11 +99,10 @@ export default {
     svg {
       width: 1.8rem;
     }
-    // margin-left: 3rem;
     text-decoration: none;
     letter-spacing: 0;
     font-size: 0.85rem;
-    color: #f2f2f2;
+    color: $white-text;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -116,22 +111,22 @@ export default {
     .svg-arrow {
       transform: translate3d(0.9rem, -0.6rem, 0);
       rect {
-        fill: #f2f2f2;
+        fill: $white-text;
       }
       polyline {
         fill: none;
-        stroke: #f2f2f2;
+        stroke: $white-text;
       }
     }
     &:focus, &:hover {
-      color: #37a6ff;
+      color: $blue;
       .svg-arrow {
         rect {
-          fill: #37a6ff;
+          fill: $blue;
         }
         polyline {
           fill: none;
-          stroke: #37a6ff;
+          stroke: $blue;
         }
       }
     }
@@ -143,7 +138,7 @@ export default {
     right: 0;
     width: 50%;
     height: 60%;
-    background: rgba(#111, 0.9);
+    background: $primary-opacity;
     transform: rotateZ(45deg) scale3d(1.8,1.8,1);
     transform-origin: bottom right;
   }
