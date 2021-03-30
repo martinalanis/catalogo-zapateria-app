@@ -14,15 +14,21 @@
     <v-container>
       <v-row class="mb-6">
         <v-col
-          v-for="({ marca, modelo, color, imagen }, index) in shoes" :key="index"
+          v-for="({ id, marca, modelo, color, imagen, precio_publico, precio_proveedor }, index) in shoes" :key="index"
           cols="12"
+          sm="6"
+          md="4"
         >
-          <ProductCard
-            :marca="marca"
-            :imagen="imagen"
-            :modelo="modelo"
-            :color="color"
-          />
+          <nuxt-link :to="`/productos/${id}`">
+            <ProductCard
+              :marca="marca"
+              :imagen="imagen"
+              :modelo="modelo"
+              :color="color"
+              :precio-publico="precio_publico"
+              :precio-proveedor="precio_proveedor"
+            />
+          </nuxt-link>
         </v-col>
       </v-row>
       <div v-if="loading" class="text-center mb-4">
@@ -44,7 +50,6 @@ export default {
   components: {
     ProductCard
   },
-  layout: 'category',
   async asyncData ({ params, $axios, error }) {
     try {
       const { categoria } = params
@@ -70,8 +75,10 @@ export default {
   },
   mounted () {
     window.onscroll = () => {
-      const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight
-
+      const bottomOfWindow = Math.ceil(document.documentElement.scrollTop + window.innerHeight) >= document.documentElement.offsetHeight
+      // console.log('handle scroll')
+      // console.log()
+      // console.log(document.documentElement.offsetHeight)
       if (bottomOfWindow && !this.loading) {
         this.fetch()
       }

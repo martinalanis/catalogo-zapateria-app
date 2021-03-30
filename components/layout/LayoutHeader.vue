@@ -5,6 +5,7 @@
       fixed
       app
       dark
+      temporary
       color="#060030"
     >
       <template #prepend>
@@ -72,12 +73,17 @@
       <v-spacer/>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
     </v-app-bar>
+    <GoTopButton/>
   </div>
 </template>
 
 <script>
+import GoTopButton from '../../components/GoTopButton'
 export default {
   name: 'Header',
+  components: {
+    GoTopButton
+  },
   data () {
     return {
       drawer: false,

@@ -2,9 +2,7 @@
   <v-app>
     <LayoutHeader/>
     <v-main>
-      <v-container>
-        <nuxt />
-      </v-container>
+      <nuxt />
     </v-main>
   </v-app>
 </template>

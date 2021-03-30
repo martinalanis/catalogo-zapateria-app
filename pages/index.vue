@@ -1,17 +1,10 @@
 <template>
-  <div>
-    <!-- <v-row>
-      <v-col>
-        <h3 class="mt-6 font-weight-medium">
-          Catálogo digital
-        </h3>
-      </v-col>
-    </v-row> -->
-    <v-row justify="center" align="center" class="my-6">
+  <v-container>
+    <v-row justify="center" align="center" class="my-4">
       <v-col
         v-for="({ image, title, to }, index) in categories" :key="index"
         cols="12"
-        sm="8"
+        sm="6"
         md="4"
       >
         <category-card
@@ -21,7 +14,7 @@
         />
       </v-col>
     </v-row>
-  </div>
+  </v-container>
 </template>
 
 <script>

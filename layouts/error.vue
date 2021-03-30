@@ -1,15 +1,4 @@
 <template>
-  <!-- <v-app>
-    <h1 v-if="error.statusCode === 404">
-      {{ pageNotFound }}
-    </h1>
-    <h1 v-else>
-      {{ otherError }}
-    </h1>
-    <NuxtLink to="/">
-      Home page
-    </NuxtLink>
-  </v-app> -->
   <div class="text-center">
     <v-row>
       <v-col>
@@ -24,7 +13,7 @@
         <v-btn
           to="/"
           tile
-          color="#212121"
+          color="#322C79"
           dark
           class="text-lowercase"
         >

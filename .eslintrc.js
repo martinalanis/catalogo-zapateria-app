@@ -16,6 +16,7 @@ module.exports = {
   // add your custom rules here
   rules: {
     'no-console': 'off',
+    'camelcase': 'off',
     'vue/html-self-closing': ["error", {
       "html": {
         "void": "any",

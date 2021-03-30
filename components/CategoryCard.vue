@@ -84,7 +84,7 @@ export default {
   &__label {
     display: block;
     padding: 1rem;
-    color: $yellow;
+    color: $yellow-c;
     font-weight: 400;
     letter-spacing: 0.1rem;
     text-align: right;
@@ -119,14 +119,14 @@ export default {
       }
     }
     &:focus, &:hover {
-      color: $blue;
+      color: $blue-c;
       .svg-arrow {
         rect {
-          fill: $blue;
+          fill: $blue-c;
         }
         polyline {
           fill: none;
-          stroke: $blue;
+          stroke: $blue-c;
         }
       }
     }
