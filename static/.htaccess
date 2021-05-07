@@ -1,0 +1,12 @@
+
+RewriteEngine on
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-SSL} !on
+RewriteCond %{HTTP_HOST} ^catalogo\.zapateriasdleon\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.catalogo\.zapateriasdleon\.com$
+RewriteRule ^(.*)$ "https\:\/\/catalogo\.zapateriasdleon\.com\/$1" [R=301,L]
+RewriteBase /
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]

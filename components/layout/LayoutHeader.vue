@@ -20,7 +20,7 @@
       <v-list flat>
         <v-list-item
           color="#ffca1d"
-          to="/"
+          to="/home"
           router
           exact
         >
@@ -51,6 +51,24 @@
           </v-list-item>
         </v-list-item-group>
       </v-list>
+      <template #append>
+        <v-row justify="center">
+          <v-col>
+            <v-btn
+              dark
+              depressed
+              color="purple darken-4"
+              block
+              tile
+              large
+              @click="$auth.logout()"
+            >
+              Salir
+              <v-icon right>mdi-logout</v-icon>
+            </v-btn>
+          </v-col>
+        </v-row>
+      </template>
     </v-navigation-drawer>
     <v-app-bar
       fixed
@@ -59,7 +77,7 @@
       color="#322C79"
       dark
     >
-      <nuxt-link to="/" class="app-bar-logo">
+      <nuxt-link to="/home" class="app-bar-logo">
         <img src="~/assets/logo.webp" alt="Zapaterias de León" class="img-block">
       </nuxt-link>
       <v-spacer/>

@@ -11,7 +11,7 @@
       <v-col>
         <h2 class="headline mb-6">Página no encontrada</h2>
         <v-btn
-          to="/"
+          to="/home"
           tile
           color="#322C79"
           dark
@@ -26,7 +26,6 @@
 
 <script>
 export default {
-  layout: 'errorPage',
   props: {
     error: {
       type: Object,

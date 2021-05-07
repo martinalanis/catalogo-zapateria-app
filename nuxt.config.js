@@ -4,6 +4,9 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
+  // Omitir rutas dinamicas
+  ssr: false,
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: 'Catalogo - %s',
@@ -15,7 +18,7 @@ export default {
       { hid: 'og:url', property: 'og:url', content: 'https://catalogo.zapateriasdleon.com' },
       { hid: 'og:title', property: 'og:title', content: 'Catalogo | Zapaterías de León' },
       { hid: 'og:image', property: 'og:image', content: 'https://api.zapateriasdleon.com/img/logo.png' },
-      { hid: 'og:description', property: 'og:description', content: 'Zapaterías de León. ¡Siempre adelante!' },
+      { hid: 'og:description', property: 'og:description', content: 'Zapaterías de León. ¡Siempre adelante!' }
     ],
     link: [
       { rel: 'icon', type: 'image/png', href: '/logo.png' }
@@ -55,9 +58,56 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa'
   ],
+
+  router: {
+    middleware: ['auth']
+  },
+
+  // Axios module configuration: https://go.nuxtjs.dev/config-axios
+  axios: {
+    credentials: true,
+    baseUrl: process.env.NODE_ENV !== 'production'
+      ? process.env.URL_API
+      : 'https://api.zapateriasdleon.com/api'
+  },
+
+  auth: {
+    strategies: {
+      laravelSanctum: {
+        provider: 'laravel/sanctum',
+        url: process.env.NODE_ENV !== 'production'
+          ? 'http://localhost/zapateria/api/public'
+          : 'https://api.zapateriasdleon.com',
+        // user endpoint uses packages defaults https://github.com/nuxt-community/auth-module/blob/dev/src/providers/laravel-sanctum.ts
+        endpoints: {
+          login: {
+            url: '/api/login'
+          },
+          logout: {
+            url: '/api/logout'
+          },
+          user: {
+            url: '/api/user'
+          }
+        },
+        user: {
+          property: false
+        }
+      }
+    },
+    redirect: {
+      // If user not logged en requires redirecto to
+      login: '/',
+      // redirect after logout
+      logout: '/',
+      // if user loggedIn go to home
+      home: '/home'
+    }
+  },
 
   pageTransition: {
     name: 'slide-fade',
@@ -69,13 +119,6 @@ export default {
     mode: 'out-in'
   },
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    baseUrl: process.env.NODE_ENV !== 'production'
-      ? process.env.URL_API
-      : 'https://api.zapateriasdleon.com/api'
-  },
-
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
@@ -83,7 +126,8 @@ export default {
     },
     icon: {
       fileName: 'logo.png'
-    }
+    },
+    name: 'Zapaterias de Leon'
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

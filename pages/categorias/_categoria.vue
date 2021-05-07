@@ -92,7 +92,7 @@ export default {
           this.loading = true
           const res = await this.$axios.$get(`/products/${this.categoria}/all?page=${this.currentPage + 1}`)
           this.currentPage = res.current_page
-          console.log(res.data)
+          // console.log(res.data)
           this.shoes = [...this.shoes, ...res.data]
         }
       } catch (err) {

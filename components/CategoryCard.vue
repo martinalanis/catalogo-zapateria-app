@@ -4,6 +4,7 @@
     height="350"
     rounded="lg"
     class="overflow-hidden"
+    :to="to"
   >
     <v-card-text class="category-card pa-0">
       <div class="category-card__image">
@@ -11,7 +12,7 @@
       </div>
       <h2 class="category-card__label">
         <span v-html="title"></span>
-        <nuxt-link class="category-card__link" :to="to">
+        <div class="category-card__link">
           <span>
             ver más
           </span>
@@ -36,7 +37,7 @@
               />
             </g>
           </svg>
-        </nuxt-link>
+        </div>
       </h2>
     </v-card-text>
   </v-card>

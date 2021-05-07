@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <LayoutHeader/>
+    <!-- <LayoutHeader/> -->
     <v-main>
       <nuxt />
     </v-main>
