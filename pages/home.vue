@@ -28,19 +28,29 @@ export default {
     return {
       categories: [
         {
-          image: require('@/assets/men_shoe-3.jpg'),
+          image: require('@/assets/caballero.jpg'),
           title: '<small>CABALLERO</small>',
           to: '/categorias/caballero'
         },
         {
-          image: require('@/assets/women_shoe-2.jpg'),
+          image: require('@/assets/dama.jpg'),
           title: 'DAMA',
           to: '/categorias/dama'
         },
         {
-          image: require('@/assets/child_shoe.jpg'),
+          image: require('@/assets/joven.jpg'),
+          title: '<small>JOVEN</small>',
+          to: '/categorias/joven'
+        },
+        {
+          image: require('@/assets/niño.jpg'),
           title: 'NIÑO',
           to: '/categorias/niño'
+        },
+        {
+          image: require('@/assets/niña.jpg'),
+          title: 'NIÑA',
+          to: '/categorias/niña'
         }
       ]
     }

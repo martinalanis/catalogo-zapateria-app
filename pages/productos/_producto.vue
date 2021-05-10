@@ -1,16 +1,23 @@
 <template>
-  <v-container>
+  <v-container class="mb-6">
     <v-row class="pt-2">
-      <v-col>
-        <v-breadcrumbs
-          :items="breadcrums"
-          class="pa-0 text-uppercase"
-        />
+      <v-col cols="12">
+        <v-btn
+          text
+          small
+          color="#322C79"
+          class="text-lowercase"
+          @click="$router.back()"
+        >
+          <v-icon left>mdi-arrow-left</v-icon>
+          regresar
+        </v-btn>
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" class="d-none d-sm-block">
-        <h3 class="px-3 mb-2">{{ marca }}</h3>
+      <v-col cols="12" class="d-flex align-center">
+        <h3 class="product-title">{{ marca }}</h3>
+        <v-divider class="divider-primary"></v-divider>
       </v-col>
       <v-col cols="12" sm="6">
         <div class="rounded-lg overflow-hidden">
@@ -18,7 +25,7 @@
         </div>
       </v-col>
       <v-col cols="12" sm="6">
-        <h3 class="px-3 mb-2 d-block d-sm-none">{{ marca }}</h3>
+        <!-- <h3 class="px-3 mb-2 d-block d-sm-none">{{ marca }}</h3> -->
         <div class="rounded elevation-1 overflow-hidden">
           <v-simple-table>
             <template #default>
@@ -118,5 +125,23 @@ export default {
 }
 tr {
   text-transform: capitalize;
+}
+.product-title {
+  display: inline-block;
+  position: relative;
+  // border: 1px solid red;
+  color: $primary;
+  padding-right: 0.7rem;
+  padding-left: 0.7rem;
+  // &::after {
+  //   content: "";
+  //   position: absolute;
+  //   top: 0.8rem;
+  //   right: 0;
+  //   width: 12rem;
+  //   height: 1px;
+  //   background: $primary;
+  //   opacity: 0.5;
+  // }
 }
 </style>

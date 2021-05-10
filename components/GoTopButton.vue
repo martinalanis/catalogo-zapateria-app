@@ -47,7 +47,7 @@ export default {
   right: 10px;
   opacity: 0;
   transition: all 0.8s ease-out;
-  z-index: 1;
+  z-index: 5;
   &__show {
     opacity: 1;
   }
