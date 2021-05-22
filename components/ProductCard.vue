@@ -1,11 +1,11 @@
 <template>
-  <!-- <div class="product elevation-1">
-
-  </div> -->
   <v-card class="product overflow-hidden" rounded="lg" hover>
     <v-card-text class="product__inner">
-      <div class="product__prices pr-1">
+      <div class="product__prices pr-1" :class="{ 'has-offer': precioDescuento }">
         <span>${{ precioPublico }}</span><span>${{ precioProveedor }}</span>
+      </div>
+      <div v-if="precioDescuento" class="product__offer">
+        <span>${{ precioDescuento }}</span>
       </div>
       <img :src="`${imgPath}/${imagen}`" alt="">
       <div class="product__label pa-3">
@@ -54,6 +54,10 @@ export default {
     precioProveedor: {
       type: String,
       default: ''
+    },
+    precioDescuento: {
+      type: String,
+      default: ''
     }
   },
   data () {
@@ -96,6 +100,26 @@ export default {
         // color;
         font-weight: 600;
       }
+    }
+    &.has-offer {
+      // opacity: 0.6;
+      span {
+        // color: #848788;
+        text-decoration: line-through;
+      }
+    }
+  }
+  &__offer {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    color: $text-color;
+    background: rgba(#D41D1F, 0.895);
+    border-radius: $border-radius;
+    span {
+      padding: 6px;
+      font-size: 1.1rem;
+      color: #f6f6f6;
     }
   }
   &__label {

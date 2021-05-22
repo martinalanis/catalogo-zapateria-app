@@ -30,7 +30,7 @@
       </v-row>
       <v-row class="mb-6 relative" :class="{ 'overlay-loading': loading }">
         <v-col
-          v-for="({ id, marca, modelo, color, imagen, precio_publico, precio_proveedor }, index) in shoes" :key="index"
+          v-for="({ id, marca, modelo, color, imagen, precio_publico, precio_proveedor, precio_descuento }, index) in shoes" :key="index"
           cols="12"
           sm="6"
           md="4"
@@ -43,6 +43,7 @@
               :color="color"
               :precio-publico="precio_publico"
               :precio-proveedor="precio_proveedor"
+              :precio-descuento="precio_descuento"
             />
           </nuxt-link>
         </v-col>

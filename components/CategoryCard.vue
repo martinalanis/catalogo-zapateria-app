@@ -3,14 +3,13 @@
     hover
     height="350"
     rounded="lg"
-    class="overflow-hidden"
     :to="to"
   >
-    <v-card-text class="category-card pa-0">
+    <v-card-text class="category-card pa-0" :class="{ 'offer': offer }">
       <div class="category-card__image">
         <img :src="image" alt="">
       </div>
-      <h2 class="category-card__label">
+      <h2 v-if="!offer" class="category-card__label">
         <span v-html="title"></span>
         <div class="category-card__link">
           <span>
@@ -39,6 +38,12 @@
           </svg>
         </div>
       </h2>
+      <div
+        v-else
+        class="offer-label"
+      >
+        <p class="mb-0">EN OFERTA</p>
+      </div>
     </v-card-text>
   </v-card>
 </template>
@@ -58,6 +63,10 @@ export default {
     to: {
       type: String,
       default: ''
+    },
+    offer: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -69,7 +78,6 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
-  overflow: hidden;
   &__image {
     // height: calc(100% - 3.2rem);
     height: 100%;
@@ -132,12 +140,33 @@ export default {
       }
     }
   }
-  &::before {
+  .offer-label {
+    position: absolute;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    // justify-content: center;
+    top: 0.5rem;
+    left: 0;
+    font-size: 1.2rem;
+    font-weight: 400;
+    font-family: 'Roboto Condensed', sans-serif;
+    // width: 100%;
+    // height: 3rem;
+    padding: 0.5rem 1rem;
+    color: #f2f2f2;
+    background: rgba(#D41D1F, 0.895);
+    border-radius: 0 6px 6px 0;
+  }
+  &:not(.offer) {
+    overflow: hidden;
+  }
+  &:not(.offer)::before {
     content: "";
     position: absolute;
     top: 0;
     right: 0;
-    width: 50%;
+    width: 60%;
     height: 60%;
     background: $primary-opacity;
     transform: rotateZ(45deg) scale3d(1.8,1.8,1);
