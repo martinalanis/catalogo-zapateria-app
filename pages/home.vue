@@ -1,5 +1,18 @@
 <template>
-  <v-container class="h-100 d-flex align-center">
+  <v-container class="h-100 d-flex align-center flex-column">
+    <v-row justify="center" align="center" class="my-4">
+      <v-col
+        cols="12"
+        sm="6"
+        md="4"
+      >
+        <category-card
+          :image="require('@/assets/men_shoe-3.jpg')"
+          to="/ofertas"
+          type="offer"
+        />
+      </v-col>
+    </v-row>
     <v-row justify="center" align="center" class="my-4">
       <v-col
         v-for="({ image, title, to }, index) in categories" :key="index"
@@ -43,14 +56,14 @@ export default {
           to: '/categorias/joven'
         },
         {
-          image: require('@/assets/niño.jpg'),
+          image: require('@/assets/nino.jpg'),
           title: 'NIÑO',
-          to: '/categorias/niño'
+          to: '/categorias/nino'
         },
         {
-          image: require('@/assets/niña.jpg'),
+          image: require('@/assets/nina.jpg'),
           title: 'NIÑA',
-          to: '/categorias/niña'
+          to: '/categorias/nina'
         }
       ]
     }

@@ -4,7 +4,7 @@
       <img :src="headerImage" alt="">
       <div class="header-image--label">
         <h2 class="header-image--title">
-          {{ categoria }}
+          OFERTAS
         </h2>
         <p class="header-image--subtitle">
           {{ total }} productos
@@ -15,16 +15,16 @@
       <v-row class="justify-center justify-md-start">
         <v-col cols="12" sm="6" md="3">
           <v-select
-            v-model="tipo"
-            :items="tipos"
+            v-model="categoria"
+            :items="categorias"
             outlined
             dense
-            label="Tipo de Zapato"
+            label="Categoria de Zapato"
             clearable
             background-color="#fafafa"
             hide-details
-            color="#Pro"
-            @change="updateType"
+            color="#322C79"
+            @change="updateCategory"
           />
         </v-col>
       </v-row>
@@ -66,22 +66,20 @@ export default {
   components: {
     ProductCard
   },
-  async asyncData ({ params, $axios, error }) {
+  async asyncData ({ $axios, error }) {
     try {
-      const { categoria } = params
-      const res = await $axios.$get(`/products/${categoria}/all`)
-      const tipos = await $axios.$get(`/products/${categoria}/types`)
-      const headerImage = require(`@/assets/${categoria}.jpg`)
+      const res = await $axios.$get('/products/offers')
+      const categorias = await $axios.$get('/products/offers/categories')
+      const headerImage = require('@/assets/men_shoe-3.jpg')
       return {
         shoes: res.data,
         currentPage: res.current_page,
         lastPage: res.last_page,
         total: res.total,
-        categoria,
         headerImage,
         loading: false,
-        tipos,
-        tipo: ''
+        categorias,
+        categoria: ''
       }
     } catch (err) {
       error({ statusCode: err.response.status, message: err.response.statusText })
@@ -101,9 +99,9 @@ export default {
       try {
         if (this.currentPage < this.lastPage) {
           this.loading = true
-          const endPoint = this.tipo
-            ? `/products/${this.categoria}/all?page=${this.currentPage + 1}&type=${this.tipo}`
-            : `/products/${this.categoria}/all?page=${this.currentPage + 1}`
+          const endPoint = this.categoria
+            ? `/products/offers?page=${this.currentPage + 1}&category=${this.categoria}`
+            : `/products/offers?page=${this.currentPage + 1}`
           const res = await this.$axios.$get(endPoint)
           this.currentPage = res.current_page
           this.shoes = [...this.shoes, ...res.data]
@@ -114,12 +112,12 @@ export default {
         this.loading = false
       }
     },
-    async updateType () {
+    async updateCategory () {
       try {
         this.loading = true
-        const endPoint = this.tipo
-          ? `/products/${this.categoria}/all?type=${this.tipo}`
-          : `/products/${this.categoria}/all`
+        const endPoint = this.categoria
+          ? `/products/offers?category=${this.categoria}`
+          : '/products/offers'
         const res = await this.$axios.$get(endPoint)
         this.currentPage = res.current_page
         this.lastPage = res.last_page
