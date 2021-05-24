@@ -52,13 +52,23 @@
                 </tr>
                 <tr>
                   <td class="r_key">Categoría:</td>
-                  <td>{{ tipoZapato.toLowerCase() }}</td>
+                  <td>{{ categoria.toLowerCase() }}</td>
                 </tr>
+                <template v-if="!!precioDescuento">
+                  <tr>
+                    <td class="r_key">Precio regular:</td>
+                    <td>${{ precioPublico }}</td>
+                  </tr>
+                  <tr>
+                    <td class="r_key">Precio mayoreo:</td>
+                    <td>${{ precioProveedor }}</td>
+                  </tr>
+                </template>
               </tbody>
             </template>
           </v-simple-table>
           <v-divider></v-divider>
-          <v-row no-gutters>
+          <v-row v-if="!!!precioDescuento" no-gutters>
             <v-col class="px-3 py-1 white d-flex flex-column justify-space-between">
               <h4 class="font-weight-regular">
                 <small>PRECIO REGULAR</small>
@@ -74,6 +84,18 @@
               <h3>
                 $ {{ precioProveedor }}
               </h3>
+            </v-col>
+          </v-row>
+          <v-row v-if="!!precioDescuento">
+            <v-col>
+              <div class="offer-price red lighten-1">
+                <h4 class="font-weight-regular">
+                  <small>PRECIO DESCUENTO</small>
+                </h4>
+                <h4>
+                  $ {{ precioDescuento }}
+                </h4>
+              </div>
             </v-col>
           </v-row>
         </div>
@@ -93,14 +115,15 @@ export default {
         ...res,
         precioPublico: res.precio_publico,
         precioProveedor: res.precio_proveedor,
-        tipoZapato: res.tipo_zapato,
+        precioDescuento: res.precio_descuento,
+        categoria: res.categoria,
         imgPath: process.env.imgPath,
         breadcrums: [
           {
-            text: res.tipo_zapato,
+            text: res.categoria,
             disabled: false,
             exact: true,
-            to: { path: `/categorias/${res.tipo_zapato}` }
+            to: { path: `/categorias/${res.categoria}` }
           },
           {
             text: res.marca,
@@ -129,19 +152,18 @@ tr {
 .product-title {
   display: inline-block;
   position: relative;
-  // border: 1px solid red;
   color: $primary;
   padding-right: 0.7rem;
   padding-left: 0.7rem;
-  // &::after {
-  //   content: "";
-  //   position: absolute;
-  //   top: 0.8rem;
-  //   right: 0;
-  //   width: 12rem;
-  //   height: 1px;
-  //   background: $primary;
-  //   opacity: 0.5;
-  // }
+}
+.offer-price {
+  // background: #f42;
+  color: #f6f6f6;
+  padding: 0.4rem 1rem;
+  line-height: 1;
+  h4:last-child {
+    font-size: 1.4rem;
+    color: lighten($yellow-c, 25%);
+  }
 }
 </style>
