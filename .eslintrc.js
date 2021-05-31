@@ -17,6 +17,7 @@ module.exports = {
   rules: {
     'no-console': 'off',
     'camelcase': 'off',
+    'curly': 'off',
     'vue/html-self-closing': ["error", {
       "html": {
         "void": "any",

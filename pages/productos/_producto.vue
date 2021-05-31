@@ -54,7 +54,7 @@
                   <td class="r_key">Categoría:</td>
                   <td>{{ categoria.toLowerCase() }}</td>
                 </tr>
-                <template v-if="!!precioDescuento">
+                <template v-if="!!precioDescuento && $auth.loggedIn">
                   <tr>
                     <td class="r_key">Precio regular:</td>
                     <td>${{ precioPublico }}</td>
@@ -68,7 +68,7 @@
             </template>
           </v-simple-table>
           <v-divider></v-divider>
-          <v-row v-if="!!!precioDescuento" no-gutters>
+          <v-row v-if="!!!precioDescuento && $auth.loggedIn" no-gutters>
             <v-col class="px-3 py-1 white d-flex flex-column justify-space-between">
               <h4 class="font-weight-regular">
                 <small>PRECIO REGULAR</small>
@@ -86,7 +86,7 @@
               </h3>
             </v-col>
           </v-row>
-          <v-row v-if="!!precioDescuento">
+          <v-row v-if="!!precioDescuento && $auth.loggedIn">
             <v-col>
               <div class="offer-price red lighten-1">
                 <h4 class="font-weight-regular">

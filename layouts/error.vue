@@ -11,7 +11,7 @@
       <v-col>
         <h2 class="headline mb-6">Página no encontrada</h2>
         <v-btn
-          to="/home"
+          to="/"
           tile
           color="#322C79"
           dark

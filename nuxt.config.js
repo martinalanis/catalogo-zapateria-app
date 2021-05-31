@@ -1,5 +1,21 @@
 import colors from 'vuetify/es5/util/colors'
 
+const getBaseURL = () => {
+  if (process.env.TYPE === 'client') {
+    return process.env.NODE_ENV !== 'production'
+      ? `${process.env.URL_API}/client`
+      : 'https://api.zapateriasdleon.com/api/client'
+  }
+  return process.env.NODE_ENV !== 'production'
+    ? process.env.URL_API
+    : 'https://api.zapateriasdleon.com/api'
+}
+
+/**
+ * NOTA: modo cliente cambiar .env TYPE=client y descomentar router/middleware
+ * modo vendedor: cambiar .env TYPE=<vacio> | vendedor y descomentar router/middleware
+ */
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -38,12 +54,11 @@ export default {
   components: true,
 
   env: {
-    urlApi: process.env.NODE_ENV !== 'production'
-      ? process.env.URL_API
-      : 'https://api.zapateriasdleon.com/api',
+    urlApi: getBaseURL(),
     imgPath: process.env.NODE_ENV !== 'production'
       ? process.env.IMG_PATH
-      : 'https://api.zapateriasdleon.com/img'
+      : 'https://api.zapateriasdleon.com/img',
+    type: process.env.TYPE
   },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -64,15 +79,13 @@ export default {
   ],
 
   router: {
-    middleware: ['auth']
+    // middleware: ['auth']
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     credentials: true,
-    baseUrl: process.env.NODE_ENV !== 'production'
-      ? process.env.URL_API
-      : 'https://api.zapateriasdleon.com/api'
+    baseUrl: getBaseURL()
   },
 
   auth: {
@@ -101,11 +114,11 @@ export default {
     },
     redirect: {
       // If user not logged en requires redirecto to
-      login: '/',
+      login: '/login',
       // redirect after logout
-      logout: '/',
+      logout: '/login',
       // if user loggedIn go to home
-      home: '/home'
+      home: '/'
     }
   },
 

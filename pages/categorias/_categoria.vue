@@ -144,7 +144,7 @@ export default {
   left: 0;
   bottom: 0;
   right: 0;
-  background: rgba(#f3f6fb, 0.5);
+  background: rgba(#f3f6fb, 0.3);
   z-index: 1;
 }
 </style>

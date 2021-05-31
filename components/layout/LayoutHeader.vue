@@ -20,7 +20,7 @@
       <v-list flat>
         <v-list-item
           color="#ffca1d"
-          to="/home"
+          to="/"
           router
           exact
         >
@@ -36,22 +36,31 @@
           color="#ffca1d"
         >
           <v-list-item
+            v-if="hasOffers"
+            to="/ofertas"
+            router
+            exact
+          >
+            <v-list-item-content>
+              <v-list-item-title>
+                Ofertas
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item
             v-for="(item, i) in categories"
             :key="i"
             :to="item.to"
             router
             exact
           >
-            <!-- <v-list-item-action>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-action> -->
             <v-list-item-content>
               <v-list-item-title v-text="item.title" />
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
       </v-list>
-      <template #append>
+      <template v-if="$auth.loggedIn" #append>
         <v-row justify="center">
           <v-col>
             <v-btn
@@ -77,7 +86,7 @@
       color="#322C79"
       dark
     >
-      <nuxt-link to="/home" class="app-bar-logo">
+      <nuxt-link to="/" class="app-bar-logo">
         <img src="~/assets/logo.webp" alt="Zapaterias de León" class="img-block">
       </nuxt-link>
       <v-spacer/>
@@ -96,6 +105,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import GoTopButton from '../../components/GoTopButton'
 export default {
   name: 'Header',
@@ -107,24 +117,39 @@ export default {
       drawer: false,
       categories: [
         {
-          // icon: 'mdi-chart-bubble',
           title: 'Caballero',
           to: '/categorias/caballero'
         },
         {
-          // icon: 'mdi-chart-bubble',
           title: 'Dama',
           to: '/categorias/dama'
         },
         {
-          // icon: 'mdi-chart-bubble',
           title: 'Niño',
-          to: '/categorias/niño'
+          to: '/categorias/nino'
+        },
+        {
+          title: 'Niña',
+          to: '/categorias/nina'
+        },
+        {
+          title: 'Joven',
+          to: '/categorias/joven'
         }
       ],
-      // title: 'Zapaterías D\' León',
       miniVariant: false
     }
+  },
+  computed: {
+    ...mapGetters(['hasOffers'])
   }
+  // async created () {
+  //   try {
+  //     const count = await this.$axios.$get('/products/offers/count')
+  //     if (count) this.$store.commit('setHasOffers', count)
+  //   } catch (err) {
+  //     this.$error({ statusCode: err.response.status, message: err.response.statusText })
+  //   }
+  // }
 }
 </script>

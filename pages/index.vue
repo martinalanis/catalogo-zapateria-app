@@ -1,151 +1,87 @@
 <template>
-  <v-container class="h-100 d-flex align-center">
-    <v-row justify="center" align="center">
-      <v-col cols="12">
-        <header class="header-logo mb-0 elevation-2">
-          <img src="~/assets/logo.webp" alt="Zapaterias de León">
-        </header>
-      </v-col>
-      <v-col
-        cols="11"
-        sm="6"
-        md="10"
-      >
-        <v-form
-          ref="form"
-          lazy-validation
-          class="h-100"
-          @submit.prevent="login"
+  <v-container>
+    <template v-if="hasOffers">
+      <v-row class="my-4">
+        <v-col
+          cols="12"
         >
-          <v-row class="h-100 justify-center align-center">
-            <v-col cols="12" md="5" class="text-center">
-              <h2 class="text-center">
-                BIENVENIDO
-              </h2>
-              <h4 class="text--secondary caption text-center mb-6">CATÁLOGO DIGITAL</h4>
-              <v-text-field
-                v-model.trim="form.phone"
-                label="Número de teléfono"
-                :rules="validations.rulePhone"
-                :error="error"
-                type="tel"
-                color="purple darken-3"
-                prepend-inner-icon="mdi-phone"
-                filled
-                background-color="#fbfbfb"
-              />
-              <v-text-field
-                v-model.trim="form.password"
-                label="Contraseña"
-                :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
-                :rules="validations.passwordRules"
-                :type="showPassword ? 'text' : 'password'"
-                :error="error"
-                hint="Longitud minima 6 caracteres"
-                prepend-inner-icon="mdi-lock-outline"
-                color="purple darken-3"
-                class="mb-4"
-                filled
-                background-color="#fbfbfb"
-                @click:append="showPassword = !showPassword"
-              />
-              <v-btn
-                dark
-                depressed
-                :loading="loading"
-                color="primary"
-                class="mb-3"
-                block
-                large
-                elevation="2"
-                type="submit"
-              >
-                Ingresar
-              </v-btn>
-            </v-col>
-            <v-col v-if="error" cols="12">
-              <v-alert
-                color="red"
-                border="left"
-                class="grey lighten-5"
-                colored-border
-                dense
-                elevation="1"
-                icon="mdi-exclamation"
-              >
-                Datos incorrectos
-              </v-alert>
-            </v-col>
-          </v-row>
-        </v-form>
+          <category-card
+            :image="require('@/assets/men_shoe-3.jpg')"
+            to="/ofertas"
+            offer
+          />
+        </v-col>
+      </v-row>
+      <v-row align="center">
+        <v-col cols="auto">
+          <h4 class="grey--text text--darken-3">CATEGORÍAS</h4>
+        </v-col>
+        <v-col>
+          <v-divider></v-divider>
+        </v-col>
+      </v-row>
+    </template>
+    <v-row class="my-4">
+      <v-col
+        v-for="({ image, title, to }, index) in categories" :key="index"
+        cols="12"
+        sm="6"
+        md="4"
+      >
+        <category-card
+          :image="image"
+          :title="title"
+          :to="to"
+        />
       </v-col>
-      <v-col cols="11">
-        <p class="caption mt-12 text-center">
-          <i>
-            <strong>IMPORTANTE:</strong> Si eres dstribuidor y no cuentas con tu contraseña puedes contactarnos para proporcionarte tus accesos
-          </i>
-        </p>
-      </v-col>
+      <!-- <v-col>
+        {{ $auth.loggedIn }}
+      </v-col> -->
     </v-row>
   </v-container>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import CategoryCard from '../components/CategoryCard'
 export default {
-  name: 'IndexPage',
+  name: 'HomePage',
   components: {
+    CategoryCard
   },
-  layout: 'login',
   data () {
     return {
-      showPassword: false,
-      loading: false,
-      form: {
-        phone: '',
-        password: ''
-      },
-      validations: {
-        rulePhone: [
-          value => !!value || 'Campo requerido.',
-          value => {
-            if (value?.length) {
-              return (value || '').length <= 10 || 'Max 10 caracteres'
-            }
-            return true
-          },
-          value => {
-            if (value?.length) {
-              const pattern = /^[0-9]+$/
-              return pattern.test(value) || 'Ingresa solo números.'
-            }
-            return true
-          }
-        ],
-        passwordRules: [
-          value => !!value || 'Campo requerido.',
-          value => value.length >= 6 || 'Minimo 6 caracteres'
-        ]
-      },
-      error: false
+      categories: [
+        {
+          image: require('@/assets/caballero.jpg'),
+          title: '<small>CABALLERO</small>',
+          to: '/categorias/caballero'
+        },
+        {
+          image: require('@/assets/dama.jpg'),
+          title: 'DAMA',
+          to: '/categorias/dama'
+        },
+        {
+          image: require('@/assets/joven.jpg'),
+          title: '<small>JOVEN</small>',
+          to: '/categorias/joven'
+        },
+        {
+          image: require('@/assets/nino.jpg'),
+          title: 'NIÑO',
+          to: '/categorias/nino'
+        },
+        {
+          image: require('@/assets/nina.jpg'),
+          title: 'NIÑA',
+          to: '/categorias/nina'
+        }
+      ]
     }
   },
-  methods: {
-    async login () {
-      // console.log(this.form)
-      if (this.$refs.form.validate()) {
-        try {
-          this.loading = true
-          await this.$auth.loginWith('laravelSanctum', {
-            data: this.form
-          })
-        } catch (err) {
-          this.error = true
-          console.log(err)
-        } finally {
-          this.loading = false
-        }
-      }
-    }
+  computed: {
+    ...mapGetters(['hasOffers'])
   }
 }
 </script>

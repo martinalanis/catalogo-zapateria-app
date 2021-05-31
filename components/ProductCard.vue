@@ -1,11 +1,12 @@
 <template>
   <v-card class="product overflow-hidden" rounded="lg" hover>
     <v-card-text class="product__inner">
-      <div class="product__prices pr-1" :class="{ 'has-offer': precioDescuento }">
+      <div v-if="$auth.loggedIn" class="product__prices pr-1" :class="{ 'has-offer': precioDescuento }">
         <span>${{ precioPublico }}</span><span>${{ precioProveedor }}</span>
       </div>
       <div v-if="precioDescuento" class="product__offer">
-        <span>${{ precioDescuento }}</span>
+        <span v-if="$auth.loggedIn">${{ precioDescuento }}</span>
+        <span v-else>EN OFERTA</span>
       </div>
       <img :src="`${imgPath}/${imagen}`" alt="">
       <div class="product__label pa-3">
