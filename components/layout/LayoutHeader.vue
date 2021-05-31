@@ -142,14 +142,14 @@ export default {
   },
   computed: {
     ...mapGetters(['hasOffers'])
+  },
+  async created () {
+    try {
+      const count = await this.$axios.$get('/products/offers/count')
+      if (count) this.$store.commit('setHasOffers', count)
+    } catch (err) {
+      this.$error({ statusCode: err.response.status, message: err.response.statusText })
+    }
   }
-  // async created () {
-  //   try {
-  //     const count = await this.$axios.$get('/products/offers/count')
-  //     if (count) this.$store.commit('setHasOffers', count)
-  //   } catch (err) {
-  //     this.$error({ statusCode: err.response.status, message: err.response.statusText })
-  //   }
-  // }
 }
 </script>
