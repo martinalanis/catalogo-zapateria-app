@@ -68,6 +68,7 @@ export default {
     ProductCard
   },
   async asyncData ({ $axios, error }) {
+    // comment
     try {
       const res = await $axios.$get('/products/offers')
       const categorias = await $axios.$get('/products/offers/categories')
