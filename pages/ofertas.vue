@@ -96,7 +96,6 @@ export default {
   },
   methods: {
     async fetch () {
-      // console.log('fetch shoes', this.shoes)
       try {
         if (this.currentPage < this.lastPage) {
           this.loading = true
