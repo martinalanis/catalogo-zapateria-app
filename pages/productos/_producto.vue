@@ -16,7 +16,7 @@
     </v-row>
     <v-row>
       <v-col cols="12" class="d-flex align-center">
-        <h3 class="product-title">{{ marca }}</h3>
+        <h3 class="product-title">{{ codigo }}</h3>
         <v-divider class="divider-primary"></v-divider>
       </v-col>
       <v-col cols="12" sm="6">
@@ -25,7 +25,7 @@
         </div>
       </v-col>
       <v-col cols="12" sm="6">
-        <!-- <h3 class="px-3 mb-2 d-block d-sm-none">{{ marca }}</h3> -->
+        <!-- <h3 class="px-3 mb-2 d-block d-sm-none">{{ codigo }}</h3> -->
         <div class="rounded elevation-1 overflow-hidden">
           <v-simple-table>
             <template #default>
@@ -126,7 +126,7 @@ export default {
             to: { path: `/categorias/${res.categoria}` }
           },
           {
-            text: res.marca,
+            text: res.codigo,
             disabled: true,
             to: ''
           }
