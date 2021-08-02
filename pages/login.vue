@@ -24,11 +24,10 @@
               </h2>
               <h4 class="text--secondary caption text-center mb-6">CATÁLOGO DIGITAL</h4>
               <v-text-field
-                v-model.trim="form.phone"
-                label="Número de teléfono"
-                :rules="validations.rulePhone"
+                v-model.trim="form.user"
+                label="Teléfono o email"
+                :rules="validations.req"
                 :error="error"
-                type="tel"
                 color="purple darken-3"
                 prepend-inner-icon="mdi-phone"
                 filled
@@ -104,25 +103,12 @@ export default {
       showPassword: false,
       loading: false,
       form: {
-        phone: '',
+        user: '',
         password: ''
       },
       validations: {
-        rulePhone: [
-          value => !!value || 'Campo requerido.',
-          value => {
-            if (value?.length) {
-              return (value || '').length <= 10 || 'Max 10 caracteres'
-            }
-            return true
-          },
-          value => {
-            if (value?.length) {
-              const pattern = /^[0-9]+$/
-              return pattern.test(value) || 'Ingresa solo números.'
-            }
-            return true
-          }
+        req: [
+          value => !!value || 'Campo requerido.'
         ],
         passwordRules: [
           value => !!value || 'Campo requerido.',
