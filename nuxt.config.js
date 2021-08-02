@@ -11,8 +11,17 @@ const getBaseURL = () => {
     : 'https://api.zapateriasdleon.com/api'
 }
 
+// const getRouterConfig = () => {
+//   const res = process.env.TYPE === 'client'
+//     ? {}
+//     : {
+//       middleware: ['auth']
+//     }
+//     return res
+// }
+
 /**
- * NOTA: modo cliente cambiar .env TYPE=client y descomentar router/middleware
+ * NOTA: modo cliente cambiar .env TYPE=client y comentar router/middleware
  * modo vendedor: cambiar .env TYPE=<vacio> | vendedor y descomentar router/middleware
  */
 
@@ -79,7 +88,7 @@ export default {
   ],
 
   router: {
-    // middleware: ['auth']
+    middleware: ['auth']
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
