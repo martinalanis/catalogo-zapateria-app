@@ -49,16 +49,16 @@ export default {
       default: ''
     },
     precioPublico: {
-      type: String,
-      default: ''
+      type: Number,
+      default: null
     },
     precioProveedor: {
-      type: String,
-      default: ''
+      type: Number,
+      default: null
     },
     precioDescuento: {
-      type: String,
-      default: ''
+      type: Number,
+      default: null
     }
   },
   data () {
