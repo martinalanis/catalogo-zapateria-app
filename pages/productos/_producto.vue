@@ -37,16 +37,28 @@
                 <tr>
                   <td class="r_key">Numeración:</td>
                   <td class="pt-1">
-                    <v-chip
-                      v-for="({name}, i) in numeraciones" :key="i"
-                      label
-                      small
-                      color="primary"
-                      class="mr-2 mb-1"
-                      :class="active === i ? 'elevation-3': ''"
-                      :outlined="active !== i || false"
-                      @click="active = i"
-                    >{{ name.toLowerCase() }}</v-chip>
+                    <template v-if="$auth.loggedIn">
+                      <v-chip
+                        v-for="({name}, i) in numeraciones" :key="i"
+                        label
+                        small
+                        color="primary"
+                        class="mr-2 mb-1"
+                        :class="active === i ? 'elevation-3': ''"
+                        :outlined="active !== i || false"
+                        @click="active = i"
+                      >{{ name.toLowerCase() }}</v-chip>
+                    </template>
+                    <template v-else>
+                      <v-chip
+                        v-for="({name}, i) in numeraciones" :key="i"
+                        label
+                        small
+                        color="primary"
+                        class="mr-2 mb-1"
+                        outlined
+                      >{{ name.toLowerCase() }}</v-chip>
+                    </template>
                     <!-- <v-btn
                       v-for="({name}, i) in numeraciones" :key="i"
                       x-small
@@ -165,6 +177,11 @@ export default {
       error({ statusCode: err.response.status, message: err.response.statusText })
     }
   },
+  data () {
+    return {
+      active: 0
+    }
+  },
   computed: {
     precioDescuento () {
       return this.numeraciones[this.active].precio_descuento
@@ -174,11 +191,6 @@ export default {
     },
     precioProveedor () {
       return this.numeraciones[this.active].precio_proveedor
-    }
-  },
-  data () {
-    return {
-      active: 0
     }
   }
 }
