@@ -21,7 +21,7 @@
       </v-col>
       <v-col cols="12" sm="6">
         <div class="rounded-lg overflow-hidden">
-          <img :src="`${imgPath}/${imagen}`" alt="" class="img-block">
+          <img :src="imagen" alt="" class="img-block">
         </div>
       </v-col>
       <v-col cols="12" sm="6">
@@ -36,11 +36,41 @@
                 </tr>
                 <tr>
                   <td class="r_key">Numeración:</td>
-                  <td>{{ numeracion.toLowerCase() }}</td>
+                  <td class="pt-1">
+                    <v-chip
+                      v-for="({name}, i) in numeraciones" :key="i"
+                      label
+                      small
+                      color="primary"
+                      class="mr-2 mb-1"
+                      :class="active === i ? 'elevation-3': ''"
+                      :outlined="active !== i || false"
+                      @click="active = i"
+                    >{{ name.toLowerCase() }}</v-chip>
+                    <!-- <v-btn
+                      v-for="({name}, i) in numeraciones" :key="i"
+                      x-small
+                      class="mr-2 mb-1"
+                      :color="'primary'"
+                      :depressed="active !== i || false"
+                      :outlined="active !== i || false"
+                      @click="active = i"
+                    >
+                      {{ name.toLowerCase() }}
+                    </v-btn> -->
+                  </td>
                 </tr>
                 <tr>
-                  <td class="r_key">Color:</td>
-                  <td>{{ color.toLowerCase() }}</td>
+                  <td class="r_key">Colores:</td>
+                  <td class="pt-1">
+                    <v-chip
+                      v-for="color in colores" :key="color"
+                      label
+                      outlined
+                      small
+                      class="mr-2 mb-1"
+                    >{{ color.toLowerCase() }}</v-chip>
+                  </td>
                 </tr>
                 <tr>
                   <td class="r_key">Material:</td>
@@ -113,11 +143,10 @@ export default {
       const res = await $axios.$get(`/products/${producto}`)
       return {
         ...res,
-        precioPublico: res.precio_publico,
-        precioProveedor: res.precio_proveedor,
-        precioDescuento: res.precio_descuento,
+        // precioPublico: res.precio_publico,
+        // precioProveedor: res.precio_proveedor,
+        // precioDescuento: res.precio_descuento,
         categoria: res.categoria,
-        imgPath: process.env.imgPath,
         breadcrums: [
           {
             text: res.categoria,
@@ -134,6 +163,22 @@ export default {
       }
     } catch (err) {
       error({ statusCode: err.response.status, message: err.response.statusText })
+    }
+  },
+  computed: {
+    precioDescuento () {
+      return this.numeraciones[this.active].precio_descuento
+    },
+    precioPublico () {
+      return this.numeraciones[this.active].precio_publico
+    },
+    precioProveedor () {
+      return this.numeraciones[this.active].precio_proveedor
+    }
+  },
+  data () {
+    return {
+      active: 0
     }
   }
 }

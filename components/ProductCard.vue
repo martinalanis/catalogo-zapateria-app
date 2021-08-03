@@ -1,18 +1,18 @@
 <template>
   <v-card class="product overflow-hidden" rounded="lg" hover>
     <v-card-text class="product__inner">
-      <div v-if="$auth.loggedIn" class="product__prices pr-1" :class="{ 'has-offer': precioDescuento }">
+      <!-- <div v-if="$auth.loggedIn" class="product__prices pr-1" :class="{ 'has-offer': precioDescuento }">
         <span>${{ precioPublico }}</span><span>${{ precioProveedor }}</span>
+      </div> -->
+      <div v-if="descuento" class="product__offer">
+        <!-- <span v-if="$auth.loggedIn">${{ precioDescuento }}</span> -->
+        <span>EN OFERTA</span>
       </div>
-      <div v-if="precioDescuento" class="product__offer">
-        <span v-if="$auth.loggedIn">${{ precioDescuento }}</span>
-        <span v-else>EN OFERTA</span>
-      </div>
-      <img :src="`${imgPath}/${imagen}`" alt="">
+      <img :src="imagen" alt="">
       <div class="product__label pa-3">
         <div>
-          <p class="mb-0">
-            {{ marca }}
+          <p v-if="$auth.loggedIn" class="mb-0">
+            {{ codigo }}
           </p>
           <p class="mb-0">
             {{ modelo }}
@@ -36,7 +36,7 @@ export default {
       type: String,
       default: ''
     },
-    marca: {
+    codigo: {
       type: String,
       default: ''
     },
@@ -44,38 +44,35 @@ export default {
       type: String,
       default: ''
     },
-    color: {
-      type: String,
-      default: ''
+    colores: {
+      type: Array,
+      default: () => []
     },
-    precioPublico: {
-      type: Number,
-      default: null
-    },
-    precioProveedor: {
-      type: Number,
-      default: null
-    },
-    precioDescuento: {
-      type: Number,
-      default: null
+    numeraciones: {
+      type: Array,
+      default: () => []
     }
   },
-  data () {
-    return {
-      imgPath: process.env.imgPath
+  computed: {
+    color () {
+      return this.colores.length > 1 ? 'Varios colores' : this.colores[0]
+    },
+    descuento () {
+      return this.numeraciones.some(i => i.precio_descuento)
     }
   }
+  // data () {
+  //   return {
+  //     imgPath: process.env.imgPath
+  //   }
+  // }
 }
 </script>
 
 <style lang="scss" scoped>
 .product {
   position: relative;
-  // width: 100%;
   height: 250px;
-  // border-radius: $border-radius;
-  // overflow: hidden;
   &__inner {
     padding: 0;
     height: 100%;
@@ -119,7 +116,8 @@ export default {
     border-radius: $border-radius;
     span {
       padding: 6px;
-      font-size: 1.1rem;
+      font-size: 0.9rem;
+      font-family: 'Roboto';
       color: #f6f6f6;
     }
   }

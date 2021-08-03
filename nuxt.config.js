@@ -64,9 +64,9 @@ export default {
 
   env: {
     urlApi: getBaseURL(),
-    imgPath: process.env.NODE_ENV !== 'production'
-      ? process.env.IMG_PATH
-      : 'https://api.zapateriasdleon.com/img',
+    // imgPath: process.env.NODE_ENV !== 'production'
+    //   ? process.env.IMG_PATH
+    //   : 'https://api.zapateriasdleon.com/img',
     type: process.env.TYPE
   },
 

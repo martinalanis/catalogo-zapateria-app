@@ -54,20 +54,18 @@
       </v-row>
       <v-row class="mb-6 relative" :class="{ 'overlay-loading': loading }">
         <v-col
-          v-for="({ id, marca, modelo, color, imagen, precio_publico, precio_proveedor, precio_descuento }, index) in shoes" :key="index"
+          v-for="({ id, codigo, modelo, colores, imagen, numeraciones }, index) in shoes" :key="index"
           cols="12"
           sm="6"
           md="4"
         >
           <nuxt-link :to="`/productos/${id}`">
             <ProductCard
-              :marca="marca"
+              :codigo="codigo"
               :imagen="imagen"
               :modelo="modelo"
-              :color="color"
-              :precio-publico="precio_publico"
-              :precio-proveedor="precio_proveedor"
-              :precio-descuento="precio_descuento"
+              :colores="colores"
+              :numeraciones="numeraciones"
             />
           </nuxt-link>
         </v-col>
