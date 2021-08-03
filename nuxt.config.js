@@ -1,14 +1,18 @@
 import colors from 'vuetify/es5/util/colors'
 
 const getBaseURL = () => {
-  if (process.env.TYPE === 'client') {
-    return process.env.NODE_ENV !== 'production'
-      ? `${process.env.URL_API}/client`
-      : 'https://api.zapateriasdleon.com/api/client'
-  }
-  return process.env.NODE_ENV !== 'production'
-    ? process.env.URL_API
-    : 'https://api.zapateriasdleon.com/api'
+  // if (process.env.TYPE === 'client') {
+  //   return process.env.NODE_ENV !== 'production'
+  //     ? `${process.env.URL_API}/client`
+  //     : 'https://api.zapateriasdleon.com/api/client'
+  // }
+  // return process.env.NODE_ENV !== 'production'
+  //   ? process.env.URL_API
+  //   : 'https://api.zapateriasdleon.com/api'
+
+  return process.env.TYPE === 'client'
+    ? `${process.env.URL_API}/api/client`
+    : `${process.env.URL_API}/api`
 }
 
 // const getRouterConfig = () => {
@@ -101,9 +105,10 @@ export default {
     strategies: {
       laravelSanctum: {
         provider: 'laravel/sanctum',
-        url: process.env.NODE_ENV !== 'production'
-          ? 'http://localhost/zapateria/api/public'
-          : 'https://api.zapateriasdleon.com',
+        // url: process.env.NODE_ENV !== 'production'
+        //   ? 'http://localhost/zapateria/api/public'
+        //   : 'https://api.zapateriasdleon.com',
+        url: process.env.URL_API,
         // user endpoint uses packages defaults https://github.com/nuxt-community/auth-module/blob/dev/src/providers/laravel-sanctum.ts
         endpoints: {
           login: {
