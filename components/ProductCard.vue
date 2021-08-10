@@ -11,11 +11,8 @@
       <img :src="imagen" alt="">
       <div class="product__label pa-3">
         <div>
-          <p v-if="$auth.loggedIn" class="mb-0">
-            {{ codigo }}
-          </p>
           <p class="mb-0">
-            {{ modelo }}
+            {{ codigo }}
           </p>
         </div>
         <div>

@@ -20,8 +20,21 @@
         <v-divider class="divider-primary"></v-divider>
       </v-col>
       <v-col cols="12" sm="6">
-        <div class="rounded-lg overflow-hidden">
+        <div class="rounded-lg overflow-hidden relative">
           <img :src="imagen" alt="" class="img-block">
+          <div class="info-overlay">
+            <div class="numeracion">
+              <small>NUM:</small> {{ numeraciones[active].name }}
+            </div>
+            <div class="price pr-1" :class="{ 'has-offer': precioDescuento }">
+              <div v-if="precioDescuento" class="price__offer">
+                ${{ precioDescuento }}
+              </div>
+              <span>${{ precioPublico }}</span><span>${{ precioProveedor }}</span>
+            </div>
+            <div class="codigo">{{ codigo }}</div>
+            <div class="color">{{ colores[activeColor] }}</div>
+          </div>
         </div>
       </v-col>
       <v-col cols="12" sm="6">
@@ -42,8 +55,8 @@
                         v-for="({name}, i) in numeraciones" :key="i"
                         label
                         small
-                        color="primary"
                         class="mr-2 mb-1"
+                        color="primary"
                         :class="active === i ? 'elevation-3': ''"
                         :outlined="active !== i || false"
                         @click="active = i"
@@ -59,29 +72,32 @@
                         outlined
                       >{{ name.toLowerCase() }}</v-chip>
                     </template>
-                    <!-- <v-btn
-                      v-for="({name}, i) in numeraciones" :key="i"
-                      x-small
-                      class="mr-2 mb-1"
-                      :color="'primary'"
-                      :depressed="active !== i || false"
-                      :outlined="active !== i || false"
-                      @click="active = i"
-                    >
-                      {{ name.toLowerCase() }}
-                    </v-btn> -->
                   </td>
                 </tr>
                 <tr>
                   <td class="r_key">Colores:</td>
                   <td class="pt-1">
-                    <v-chip
-                      v-for="color in colores" :key="color"
-                      label
-                      outlined
-                      small
-                      class="mr-2 mb-1"
-                    >{{ color.toLowerCase() }}</v-chip>
+                    <template v-if="$auth.loggedIn">
+                      <v-chip
+                        v-for="(color, t) in colores" :key="t"
+                        label
+                        small
+                        class="mr-2 mb-1"
+                        color="primary"
+                        :class="activeColor === t ? 'elevation-3': ''"
+                        :outlined="activeColor !== t || false"
+                        @click="activeColor = t"
+                      >{{ color.toLowerCase() }}</v-chip>
+                    </template>
+                    <template v-else>
+                      <v-chip
+                        v-for="color in colores" :key="color"
+                        label
+                        outlined
+                        small
+                        class="mr-2 mb-1"
+                      >{{ color.toLowerCase() }}</v-chip>
+                    </template>
                   </td>
                 </tr>
                 <tr>
@@ -179,7 +195,8 @@ export default {
   },
   data () {
     return {
-      active: 0
+      active: 0,
+      activeColor: 0
     }
   },
   computed: {
@@ -191,6 +208,11 @@ export default {
     },
     precioProveedor () {
       return this.numeraciones[this.active].precio_proveedor
+    }
+  },
+  methods: {
+    changeColor (k) {
+      console.log(k)
     }
   }
 }
@@ -221,6 +243,61 @@ tr {
   h4:last-child {
     font-size: 1.4rem;
     color: lighten($yellow-c, 25%);
+  }
+}
+.info-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  div {
+    $posX: 0.7rem;
+    $posY: 0.45rem;
+    position: absolute;
+    &.numeracion {
+      top: $posY;
+      left: $posX;
+      font-weight: 600;
+    }
+    &.price {
+      top: $posY;
+      right: $posX;
+      color: $text-color;
+      background: rgba(255,255,255,0.4);
+      border-radius: $border-radius;
+      span {
+        padding: 0 6px;
+        font-size: 0.8rem;
+        &:last-child {
+          border-left: 1px solid rgba(0,0,0,0.3);
+          // color;
+          font-weight: 600;
+        }
+      }
+      &.has-offer {
+        span {
+          text-decoration: line-through;
+        }
+      }
+      &__offer {
+        position: relative;
+        // padding-left: 6px;
+        text-align: center;
+        font-weight: 600;
+        color: #FFF;
+        background: rgba(#D41D1F, 0.895);
+        border-radius: $border-radius;
+      }
+    }
+    &.codigo {
+      bottom: $posY;
+      left: $posX;
+    }
+    &.color {
+      bottom: $posY;
+      right: $posX;
+    }
   }
 }
 </style>
