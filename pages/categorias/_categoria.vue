@@ -54,7 +54,7 @@
       </v-row>
       <v-row class="mb-6 relative" :class="{ 'overlay-loading': loading }">
         <v-col
-          v-for="({ id, codigo, modelo, colores, imagen, numeraciones }, index) in shoes" :key="index"
+          v-for="({ id, codigo, modelo, colores, imagen_url, numeraciones }, index) in shoes" :key="index"
           cols="12"
           sm="6"
           md="4"
@@ -62,7 +62,7 @@
           <nuxt-link :to="`/productos/${id}`">
             <ProductCard
               :codigo="codigo"
-              :imagen="imagen"
+              :imagen="imagen_url"
               :modelo="modelo"
               :colores="colores"
               :numeraciones="numeraciones"

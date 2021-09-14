@@ -30,6 +30,7 @@
                 :error="error"
                 color="purple darken-3"
                 prepend-inner-icon="mdi-phone"
+                autocomplete="new-email"
                 filled
                 background-color="#fbfbfb"
               />
@@ -44,6 +45,7 @@
                 prepend-inner-icon="mdi-lock-outline"
                 color="purple darken-3"
                 class="mb-4"
+                autocomplete="new-password"
                 filled
                 background-color="#fbfbfb"
                 @click:append="showPassword = !showPassword"

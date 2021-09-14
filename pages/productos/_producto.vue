@@ -21,8 +21,8 @@
       </v-col>
       <v-col cols="12" sm="6">
         <div class="rounded-lg overflow-hidden relative">
-          <img :src="imagen" alt="" class="img-block">
-          <div class="info-overlay">
+          <img :src="imagen_url" alt="" class="img-block">
+          <div class="info-overlay" v-if="$auth.loggedIn">
             <div class="numeracion">
               <small>NUM:</small> {{ numeraciones[active].name }}
             </div>
