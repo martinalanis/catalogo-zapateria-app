@@ -29,10 +29,6 @@
 export default {
   name: 'ProductCard',
   props: {
-    imagen: {
-      type: String,
-      default: ''
-    },
     codigo: {
       type: String,
       default: ''
@@ -52,17 +48,15 @@ export default {
   },
   computed: {
     color () {
-      return this.colores.length > 1 ? 'Varios colores' : this.colores[0]
+      return this.colores.length > 1 ? 'Varios colores' : this.colores[0].name
     },
     descuento () {
       return this.numeraciones.some(i => i.precio_descuento)
+    },
+    imagen () {
+      return this.colores.length ? this.colores[0].imagen_url : null
     }
   }
-  // data () {
-  //   return {
-  //     imgPath: process.env.imgPath
-  //   }
-  // }
 }
 </script>
 

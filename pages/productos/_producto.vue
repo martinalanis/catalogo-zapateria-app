@@ -21,8 +21,8 @@
       </v-col>
       <v-col cols="12" sm="6">
         <div class="rounded-lg overflow-hidden relative">
-          <img :src="imagen_url" alt="" class="img-block">
-          <div class="info-overlay" v-if="$auth.loggedIn">
+          <img :src="colores[activeColor].imagen_url" alt="" class="img-block">
+          <div v-if="$auth.loggedIn" class="info-overlay">
             <div class="numeracion">
               <small>NUM:</small> {{ numeraciones[active].name }}
             </div>
@@ -33,7 +33,7 @@
               <span>${{ precioPublico }}</span><span>${{ precioProveedor }}</span>
             </div>
             <div class="codigo">{{ codigo }}</div>
-            <div class="color">{{ colores[activeColor] }}</div>
+            <div class="color">{{ colores[activeColor].name }}</div>
           </div>
         </div>
       </v-col>
@@ -77,27 +77,16 @@
                 <tr>
                   <td class="r_key">Colores:</td>
                   <td class="pt-1">
-                    <template v-if="$auth.loggedIn">
-                      <v-chip
-                        v-for="(color, t) in colores" :key="t"
-                        label
-                        small
-                        class="mr-2 mb-1"
-                        color="primary"
-                        :class="activeColor === t ? 'elevation-3': ''"
-                        :outlined="activeColor !== t || false"
-                        @click="activeColor = t"
-                      >{{ color.toLowerCase() }}</v-chip>
-                    </template>
-                    <template v-else>
-                      <v-chip
-                        v-for="color in colores" :key="color"
-                        label
-                        outlined
-                        small
-                        class="mr-2 mb-1"
-                      >{{ color.toLowerCase() }}</v-chip>
-                    </template>
+                    <v-chip
+                      v-for="({name}, t) in colores" :key="t"
+                      label
+                      small
+                      class="mr-2 mb-1"
+                      color="primary"
+                      :class="activeColor === t ? 'elevation-3': ''"
+                      :outlined="activeColor !== t || false"
+                      @click="activeColor = t"
+                    >{{ name.toLowerCase() }}</v-chip>
                   </td>
                 </tr>
                 <tr>
@@ -171,9 +160,6 @@ export default {
       const res = await $axios.$get(`/products/${producto}`)
       return {
         ...res,
-        // precioPublico: res.precio_publico,
-        // precioProveedor: res.precio_proveedor,
-        // precioDescuento: res.precio_descuento,
         categoria: res.categoria,
         breadcrums: [
           {
