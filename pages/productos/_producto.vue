@@ -30,7 +30,7 @@
               <div v-if="precioDescuento" class="price__offer">
                 ${{ precioDescuento }}
               </div>
-              <span>${{ precioPublico }}</span><span>${{ precioProveedor }}</span>
+              <span>${{ precioPublico }}</span><span>{{ precioProveedor }}</span>
             </div>
             <div class="codigo">{{ codigo }}</div>
             <div class="color">{{ colores[activeColor].name }}</div>
@@ -108,7 +108,7 @@
                   </tr>
                   <tr>
                     <td class="r_key">Precio mayoreo:</td>
-                    <td>${{ precioProveedor }}</td>
+                    <td>{{ precioProveedor }}</td>
                   </tr>
                 </template>
               </tbody>
@@ -129,7 +129,7 @@
                 <small>PRECIO MAYOREO</small>
               </h4>
               <h3>
-                $ {{ precioProveedor }}
+                {{ precioProveedor }}
               </h3>
             </v-col>
           </v-row>
@@ -194,6 +194,8 @@ export default {
     },
     precioProveedor () {
       return this.numeraciones[this.active].precio_proveedor
+        ? `$ ${this.numeraciones[this.active].precio_proveedor}`
+        : 'n/a'
     }
   },
   methods: {

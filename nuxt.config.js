@@ -1,28 +1,10 @@
 import colors from 'vuetify/es5/util/colors'
 
 const getBaseURL = () => {
-  // if (process.env.TYPE === 'client') {
-  //   return process.env.NODE_ENV !== 'production'
-  //     ? `${process.env.URL_API}/client`
-  //     : 'https://api.zapateriasdleon.com/api/client'
-  // }
-  // return process.env.NODE_ENV !== 'production'
-  //   ? process.env.URL_API
-  //   : 'https://api.zapateriasdleon.com/api'
-
   return process.env.TYPE === 'client'
     ? `${process.env.URL_API}/api/client`
     : `${process.env.URL_API}/api`
 }
-
-// const getRouterConfig = () => {
-//   const res = process.env.TYPE === 'client'
-//     ? {}
-//     : {
-//       middleware: ['auth']
-//     }
-//     return res
-// }
 
 /**
  * NOTA: modo cliente cambiar .env TYPE=client y comentar router/middleware
